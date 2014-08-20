@@ -7,8 +7,9 @@ influxdb:
    pass: graphite
    db:   graphite
    schema:
-     - ['', 60]
-     - ['high-res-metrics', 10]
+     - ['.*', 30]
+     - ['5m.*', 300]
+     - ['1h.*', 3600]
 cache:
     CACHE_TYPE: 'filesystem'
     CACHE_DIR: '/tmp/graphite-api-cache'
