@@ -1,4 +1,30 @@
-#!/bin/bash
+#!/bin/bash -ex
 
+echo 'Staring graphite-api...'
+
+HOST=${INFLUXDB_PORT_8086_TCP_ADDR:-$INFLUXDB_HOST}
+HOST=${HOST:-influxdb}
+
+PORT=${INFLUXDB_PORT_8086_TCP_PORT:-$INFLUXDB_PORT}
+PORT=${PORT:-8086}
+
+USER=${INFLUXDB_ENV_GRAPHITE_USERNAME:-$GRAPHITE_USERNAME}
+USER=${USER:-graphite}
+
+PASS=${INFLUXDB_ENV_GRAPHITE_PASSWORD:-$GRAPHITE_PASSWORD}
+PASS=${PASS:-graphite}
+
+DB=${INFLUXB_ENV_GRAPHITE_DATABASE:-$GRAPHITE_DATABASE}
+DB=${DB:-graphite}
+
+# replace config data
+sed -i "s/{{host}}/${HOST}/g" /etc/graphite-api.yaml 
+sed -i "s/{{port}}/${PORT}/g" /etc/graphite-api.yaml 
+sed -i "s/{{user}}/${USER}/g" /etc/graphite-api.yaml 
+sed -i "s/{{pass}}/${PASS}/g" /etc/graphite-api.yaml 
+sed -i "s/{{db}}/${DB}/g" /etc/graphite-api.yaml 
+
+echo 'updated config'
+
+# run graphite
 gunicorn -b 0.0.0.0:8000 -w 2 --log-level debug graphite_api.app:app
-

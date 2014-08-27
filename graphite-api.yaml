@@ -1,11 +1,11 @@
 finders:
   - graphite_influxdb.InfluxdbFinder
 influxdb:
-   host: influxdb
-   port: 8086
-   user: graphite
-   pass: graphite
-   db:   graphite
+   host: {{host}}
+   port: {{port}}
+   user: {{user}}
+   pass: {{pass}}
+   db:   {{db}}
    schema:
      - ['.*', 30]
      - ['5m.*', 300]

@@ -38,9 +38,13 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 ADD ./run /usr/local/bin/run-graphite-api
 RUN chmod 0744 /usr/local/bin/run-graphite-api
 
+ENV INFLUXDB_HOST influxdb
+ENV INFLUXDB_PORT 8086
+ENV GRAPHITE_USERNAME graphite
+ENV GRAPHITE_PASSWORD graphite
+ENV GRAPHITE_DATABASE graphite
+
 # graphite-api
 EXPOSE 8000
 
-VOLUME /var/log/supervisor
-
-CMD /usr/local/bin/run-graphite-api
+CMD ["/usr/local/bin/run-graphite-api"]
