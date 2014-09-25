@@ -17,7 +17,7 @@ RUN apt-get install -y build-essential python-dev libffi-dev libcairo2-dev pytho
 RUN pip install gunicorn Flask-Cache statsd raven blinker
 
 # patched version with cache
-RUN pip install https://github.com/Dieterbe/graphite-api/tarball/support-templates
+RUN pip install https://github.com/Dieterbe/graphite-api/tarball/support-templates2
 
 # latest graphite-influxdb
 RUN pip install https://github.com/vimeo/graphite-influxdb/tarball/master
